@@ -12,24 +12,6 @@ This project is a simple To-Do List application built with React. It allows user
 - Mark tasks as completed
 - Move tasks back from completed to the to-do list
 
-### Installation
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/todo-app.git
-   cd todo-app
-   ```
-
-2. Install the dependencies:
-   ```sh
-   npm install
-   ```
-
-3. Start the development server:
-   ```sh
-   npm start
-   ```
-
 ### Usage
 ![alt text](image.png)
 1. To add a new task, enter the task description in the input field and click the "Add Task" button.
