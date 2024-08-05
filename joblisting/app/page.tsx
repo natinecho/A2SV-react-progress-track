@@ -9,8 +9,8 @@ export default function Home() {
 <>
 <div className=''>
 
-    <div className='w-4/5 m-6 p-3 flex items-center justify-between'>
-        <div className='flex flex-col text-sm font-light'>
+    <div className='w-4/5 m-6 p-3 flex items-center font-serif justify-between'>
+        <div className='flex flex-col  text-sm font-light'>
           <p className='font-extrabold text-3xl text-slate-700' >Opportunities</p>
           <p>Showing {count} results</p>
         </div>

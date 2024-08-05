@@ -1,17 +1,39 @@
-import { notFound } from 'next/navigation';
-import { GET, Job } from '../../api/jobs/route';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { Job } from '../../api/jobs/route';
 import About from './component/about';
 import { FaMapMarkerAlt, FaRegCheckCircle } from "react-icons/fa";
 
-export default async function JobDetail({ params }: { params: { id: string } }) {
-    const response = await GET();
-    const jobs = await response.json();
+export default function JobDetail({ params }: { params: { id: string } }) {
+    const [job, setJob] = useState<Job | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
-    if (response.status === 200) {
-        const job: Job | undefined = jobs.jobs.find((job: Job) => job.id.toString() === params.id);
+    useEffect(() => {
+        const fetchJob = async () => {
+          try {
+            const response = await fetch(`https://akil-backend.onrender.com/opportunities/${params.id}`);
+            if (!response.ok) {
+              throw new Error('Failed to fetch job');
+            }
+            const data = await response.json();
+            setJob(data.data);
+            setLoading(false);
+          } catch (error) {
+            console.error('Error fetching job:', error);
+            setLoading(false);
+          }
+        };
+    
+        fetchJob();
+      }, [params.id]);
+
+        if (loading) {
+            return <div>Loading...</div>
+        }
 
         if (!job) {
-            notFound();
+            return <div>Item not found</div>
         }
 
         const style = "py-3 font-extrabold text-3xl text-black";
@@ -26,7 +48,7 @@ export default async function JobDetail({ params }: { params: { id: string } }) 
                     <div>
                         <h1 className={style}>Responsibilities</h1>
                         <ul>
-                            {job.responsibilities.map((item, index) => (
+                            {job.responsibilities.split('\n').map((item, index) => (
                                 <li key={index} className='flex items-center gap-3 p-1'>
                                     <FaRegCheckCircle /> {item}
                                 </li>
@@ -36,25 +58,20 @@ export default async function JobDetail({ params }: { params: { id: string } }) 
                     <div>
                         <h1 className={style}>Ideal Candidate</h1>
                         <ul className='list-disc ml-3'>
-                            <li className='p-1'>{job.ideal_candidate.age}</li>
-                            <li className='p-1'>{job.ideal_candidate.gender}</li>
-                            <li className='p-1'>{job.ideal_candidate.traits}</li>
+                            <li className='p-1'>{job.idealCandidate}</li>
                         </ul>
                     </div>
                     <div>
                         <h1 className={style}>When & Where</h1>
                         <p className='flex gap-3 items-center'>
                             <FaMapMarkerAlt className='text-blue-600 rounded-full p-1 border-2 h-[35px] w-[35px] shadow-sm' />
-                            {job.when_where}
+                            {job.whenAndWhere}
                         </p>
                     </div>
                 </div>
                 <div>
-                    <About {...job.about} />
+                    <About datePosted={job.datePosted} deadline={job.deadline} startDate={job.startDate} endDate={job.endDate} categories={job.categories} requiredSkills={job.requiredSkills} location={job.location} />
                 </div>
             </div>
         );
-    } else {
-        notFound();
     }
-}

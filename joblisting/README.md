@@ -1,10 +1,11 @@
 # Job Listing Application
-![alt text](image.png)
+![alt text](<Screenshot 2024-08-05 093438.png>) 
 
 Welcome to the Job Listing Application! This project is designed to provide users with a detailed list of job opportunities, allowing them to view job details, responsibilities, and ideal candidate traits. The application is built using React and Next.js.
 
 
-![alt text](image-1.png)
+![alt text](<Screenshot 2024-08-05 093540.png>)
+
 ## Features
 
 - List of job postings

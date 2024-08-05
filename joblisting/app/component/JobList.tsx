@@ -13,13 +13,14 @@ const JobList: React.FC<JobListProps> = ({ setCount }) => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch('/api/jobs');
+        const response = await fetch('https://akil-backend.onrender.com/opportunities/search');
         if (!response.ok) {
           throw new Error('Failed to fetch jobs');
         }
         const data = await response.json();
-        setJobs(data.jobs); // Ensure data structure matches expected format
-        setCount(data.jobs.length); // Set count here
+        console.log(data.data)
+        setJobs(data.data); // Ensure data structure matches expected format
+        setCount(data.data.length); // Set count here
       } catch (error) {
         console.error('Error fetching jobs:', error);
       }
