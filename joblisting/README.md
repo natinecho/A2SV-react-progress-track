@@ -1,10 +1,16 @@
+Here's a README with added information about authentication via Google and database integration:
+
+---
+![alt text](<Screenshot 2024-08-07 141014.png>) 
+![alt text](<Screenshot 2024-08-07 140923.png>) 
+![alt text](<Screenshot 2024-08-07 140943.png>) 
+![alt text](<Screenshot 2024-08-07 141145.png>)
 # Job Listing Application
-![alt text](<Screenshot 2024-08-05 093438.png>) 
-
-Welcome to the Job Listing Application! This project is designed to provide users with a detailed list of job opportunities, allowing them to view job details, responsibilities, and ideal candidate traits. The application is built using React and Next.js.
 
 
-![alt text](<Screenshot 2024-08-05 093540.png>)
+Welcome to the Job Listing Application! This project is designed to provide users with a comprehensive list of job opportunities, including detailed views of job descriptions, responsibilities, and ideal candidate traits. The application leverages both Google and database authentication for user management.
+
+![Job Listing Application Screenshot](<Screenshot 2024-08-05 093540.png>)
 
 ## Features
 
@@ -13,6 +19,7 @@ Welcome to the Job Listing Application! This project is designed to provide user
 - Job responsibilities and ideal candidate traits
 - Job location and timing details
 - Dynamic job count update
+- User authentication via Google and database
 
 ## Technologies Used
 
@@ -22,49 +29,33 @@ Welcome to the Job Listing Application! This project is designed to provide user
 - Tailwind CSS
 - Node.js
 - JSON for job data storage
+- NextAuth.js for authentication
 
+## Authentication
+
+The application supports user authentication through:
+
+- **Google Sign-In**: Allows users to sign in using their Google accounts.
+- **Database Authentication**: Users can also log in using credentials stored in the application's database.
+
+### Authentication Setup
+
+1. **Google Authentication**:
+   - Integrated using NextAuth.js with GoogleProvider.
+   - Ensure to set up your Google API credentials and add them to your environment variables.
+
+2. **Database Authentication**:
+   - Implemented using NextAuth.js with CredentialsProvider.
+   - Ensure the backend service is set up to handle authentication requests and store user credentials securely.
 
 ## Usage
 
 Once the application is running, you can:
 
-- View a list of job postings on the main page.
-- Click on any job to view its details, including description, responsibilities, ideal candidate traits, and location/timing information.
+- **Authenticate**: Use Google Sign-In or login with database credentials.
+- **View Job Listings**: Access the main page to see a list of job postings.
+- **View Job Details**: Click on any job to view detailed information, including descriptions, responsibilities, ideal candidate traits, and location/timing details.
 
-## File Structure
-
-The project file structure is as follows:
-
-```plaintext
-joblisting
-│
-├── components
-│   ├── JobCard.tsx
-│   ├── JobDetail.tsx
-│   ├── JobList.tsx
-│   └── About.tsx
-│
-├── pages
-│   ├── api
-│   │   └── jobs
-│   │       └── route.ts
-│   └── index.tsx
-│
-├── public
-│   └── images
-│
-├── styles
-│   └── globals.css
-│
-├── lib
-│   └── jobs.json
-│
-├── .gitignore
-├── README.md
-├── next.config.js
-├── package.json
-└── tsconfig.json
-```
 
 ### Components
 
@@ -76,7 +67,3 @@ joblisting
 ### Pages
 
 - **index.tsx**: The main page that renders the job list.
-
-### API
-
-- **route.ts**: Provides the API endpoint to fetch job data from the `jobs.json` file.
