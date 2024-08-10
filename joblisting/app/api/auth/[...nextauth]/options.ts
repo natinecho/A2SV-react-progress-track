@@ -2,9 +2,9 @@ import { Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 
-const userRole = "admin"; 
+const userRole = "user"; 
 
 interface credentialsValue{
     email:string,
@@ -43,7 +43,7 @@ export const Options = {
 
                 console.log(res)
                 if(res.ok && user){
-                    user.role = "not varified"
+                    user.role = "varified"
                     return user
                 }
                 return null
@@ -53,25 +53,23 @@ export const Options = {
     callbacks: {
         async jwt({ token, user }: { token: JWT, user?: any }) {
             if (user) {
-                token.role = user.role;
+                token.role = user.data.role;
+                token.id = user.data.id;
+                token.accessToken = user.data.accessToken
             }
             return token;
         },
         async session({ session, token }: { session: Session, token: JWT }) {
             if (session?.user) {
-                session.user.name = token.name;
+                session.user.id = token.id;
+                session.user.accessToken = token.accessToken;
             }
             return session;
         }
     },
 
     pages:{
-        signIn:"/singIn"
+        signIn:"/singIn",
     }
 
 };
-
-
-
-
-

@@ -24,7 +24,7 @@ const SignUp = ()=>{
             email: "",
             password: "",
             confirmPassword: "",
-            role: "",
+            role: "user",
           },
     })
     const {errors,isSubmitSuccessful} = formState
