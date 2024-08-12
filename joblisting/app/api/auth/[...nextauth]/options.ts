@@ -55,6 +55,7 @@ export const Options = {
             if (user) {
                 token.role = user.data.role;
                 token.id = user.data.id;
+                token.name = user.data.name;
                 token.accessToken = user.data.accessToken
             }
             return token;
@@ -62,6 +63,7 @@ export const Options = {
         async session({ session, token }: { session: Session, token: JWT }) {
             if (session?.user) {
                 session.user.id = token.id;
+                session.user.name = token.name;
                 session.user.accessToken = token.accessToken;
             }
             return session;
